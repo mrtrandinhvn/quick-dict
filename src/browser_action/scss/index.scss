@@ -1,0 +1,8 @@
+$color-primary: red;
+$color-accent-1: white;
+body {
+    background-color: $color-primary;
+    div {
+        color: $color-accent-1;
+    }
+}
