@@ -19,9 +19,15 @@
 
 <body>
     <div class="main-content">
-        <select>
-            <option></option>
-        </select>
+        <div class="search-section">
+            <select class="search-section__type-select">
+                <option value="english">English</option>
+                <option value="american_english">American English</option>
+            </select>
+            <span class="search-section__search-box">
+                <input type="search" placeholder="Search OALD" />
+            </span>
+        </div>
     </div>
 
     <script src="../../built/browser_action/js/index.bundle.js?version=1.0.0"></script>

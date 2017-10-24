@@ -15,5 +15,6 @@
     },
     "workbench.iconTheme": "vscode-icons",
     "window.zoomLevel": 0,
-    "tslint.autoFixOnSave": true
+    "tslint.autoFixOnSave": true,
+    "vsicons.presets.angular": false
 }

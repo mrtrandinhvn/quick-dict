@@ -1,8 +1,23 @@
-$color-primary: red;
+$color-primary: green;
 $color-accent-1: white;
 body {
     background-color: $color-primary;
     div {
         color: $color-accent-1;
+    }
+}
+
+.search-section {
+    color: red;
+    & &__type-select {
+        height: 40px;
+        & &__span {
+            color: blue;
+        }
+    }
+    &__search-box {
+        input {
+            height: 40px;
+        }
     }
 }
