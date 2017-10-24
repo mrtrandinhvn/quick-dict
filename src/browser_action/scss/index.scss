@@ -9,7 +9,7 @@ body {
 
 .search-section {
     color: red;
-    & &__type-select {
+    .search-section__type-select {
         height: 40px;
         & &__span {
             color: blue;
