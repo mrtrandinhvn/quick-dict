@@ -1,5 +1,4 @@
-$color-primary: green;
-$color-accent-1: white;
+@import "../../shared/_shared";
 body {
     background-color: $color-primary;
     div {
@@ -7,9 +6,11 @@ body {
     }
 }
 
+.dinh-app {}
+
 .search-section {
     color: red;
-    .search-section__type-select {
+    &__type-select {
         height: 40px;
         & &__span {
             color: blue;

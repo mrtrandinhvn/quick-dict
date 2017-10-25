@@ -6,7 +6,7 @@
     "git": ""
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "dev": "webpack --watch --progress",
     "dev-less": "webpack --watch --progress --config webpack-styles.config.js",
     "build": "webpack -p --progress --env.production",
