@@ -11,7 +11,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts?$/,
+                test: /\.tsx?$|\.ts?$/,
                 use: "ts-loader",
                 exclude: /(node_modules|bower_components)/,
             },
@@ -25,7 +25,7 @@ module.exports = {
     },
     plugins: [],
     resolve: {
-        extensions: [".ts", ".js"],
+        extensions: [".ts", ".js", "tsx"],
         modules: [
             path.resolve(__dirname),
             "node_modules"

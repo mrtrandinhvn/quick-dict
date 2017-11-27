@@ -1,24 +1,15 @@
 @import "../../shared/_shared";
+@mixin fontFamily {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html {
+    @include fontFamily();
+}
+
 body {
-    background-color: $color-primary;
-    div {
-        color: $color-accent-1;
-    }
+    @extend html;
+    border: 1px solid $color-primary;
 }
 
 .dinh-app {}
-
-.search-section {
-    color: red;
-    &__type-select {
-        height: 40px;
-        & &__span {
-            color: blue;
-        }
-    }
-    &__search-box {
-        input {
-            height: 40px;
-        }
-    }
-}
