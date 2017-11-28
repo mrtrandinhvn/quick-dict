@@ -2,7 +2,7 @@ const path = require("path");
 module.exports = {
     context: path.join(__dirname),
     entry: {
-        "browser_action/js/index": "./src/browser_action/scripts/index.ts"
+        "browser_action/js/index": "./src/browser_action/scripts/index.tsx"
     },
     output: {
         path: path.join(__dirname + "/built"),
@@ -25,7 +25,7 @@ module.exports = {
     },
     plugins: [],
     resolve: {
-        extensions: [".ts", ".js", "tsx"],
+        extensions: [".ts", ".js", ".tsx"],
         modules: [
             path.resolve(__dirname),
             "node_modules"
