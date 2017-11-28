@@ -5,7 +5,8 @@ module.exports = {
     devtool: "source-map",
     context: path.join(__dirname),
     entry: {
-        "browser_action/css/index": "./src/browser_action/scss/index.scss"
+        "browser_action/css/index": "./src/browser_action/scss/index.scss",
+        "content_scripts/css/index": "./src/content_scripts/scss/index.scss"
     },
     output: {
         path: path.join(__dirname + "/built"),

@@ -1,0 +1,8 @@
+@mixin scale($ratio:1.2) {
+    transform: scale($ratio);
+}
+
+@mixin transition($time:0.2s, $property:all) {
+    transition-duration: $time;
+    transition-property: $property;
+}

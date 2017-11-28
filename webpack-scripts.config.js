@@ -2,7 +2,8 @@ const path = require("path");
 module.exports = {
     context: path.join(__dirname),
     entry: {
-        "browser_action/js/index": "./src/browser_action/scripts/index.ts"
+        "browser_action/js/index": "./src/browser_action/scripts/index.ts",
+        "content_scripts/js/index": "./src/content_scripts/scripts/index.ts"
     },
     output: {
         path: path.join(__dirname + "/built"),

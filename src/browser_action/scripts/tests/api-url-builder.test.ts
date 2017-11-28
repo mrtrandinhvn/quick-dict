@@ -1,22 +1,34 @@
 import { buildUrl } from "../api-url-builder";
 import { DictionaryType } from "../constants";
 
-describe("Test build api-url-builder", () => {
-    it("case-1: DictionaryType.English", () => {
-        const actualResult = buildUrl("hmm", DictionaryType.English);
+describe("Test api-url-builder", () => {
+    it("case-1", () => {
+        const actualResult = buildUrl("hmm", DictionaryType.Oxford_autocomplete_English);
         const expectation = "https://www.oxfordlearnersdictionaries.com/autocomplete/english/?q=hmm&contentType=application%2Fjson%3B%20charset%3Dutf-8";
         expect(actualResult).toBe(expectation);
     });
 
-    it("case-2: DictionaryType.AmericanEnglish", () => {
-        const actualResult = buildUrl("effect", DictionaryType.AmericanEnglish);
+    it("case 2", () => {
+        const actualResult = buildUrl("effect", DictionaryType.Oxford_autocomplete_AmericanEnglish);
         const expectation = "https://www.oxfordlearnersdictionaries.com/autocomplete/american_english/?q=effect&contentType=application%2Fjson%3B%20charset%3Dutf-8";
         expect(actualResult).toBe(expectation);
     });
 
     it("case-3: encodeUri", () => {
-        const actualResult = buildUrl("hello world", DictionaryType.AmericanEnglish);
+        const actualResult = buildUrl("hello world", DictionaryType.Oxford_autocomplete_AmericanEnglish);
         const expectation = "https://www.oxfordlearnersdictionaries.com/autocomplete/american_english/?q=hello%20world&contentType=application%2Fjson%3B%20charset%3Dutf-8";
+        expect(actualResult).toBe(expectation);
+    });
+
+    it("case-4: hellochao", () => {
+        const actualResult = buildUrl("go home", DictionaryType.hellochao_tudien);
+        const expectation = "https://www.hellochao.vn/tu-dien-tach-ghep-am/?act=search&type=word&sct=go%20home";
+        expect(actualResult).toBe(expectation);
+    });
+
+    it("case-5: Oxford GET url", () => {
+        const actualResult = buildUrl("this", DictionaryType.Oxford_English);
+        const expectation = "https://www.oxfordlearnersdictionaries.com/definition/english/this";
         expect(actualResult).toBe(expectation);
     });
 });
