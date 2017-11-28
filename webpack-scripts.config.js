@@ -2,7 +2,7 @@ const path = require("path");
 module.exports = {
     context: path.join(__dirname),
     entry: {
-        "browser_action/js/index": "./src/browser_action/scripts/index.ts",
+        "browser_action/js/index": "./src/browser_action/scripts/index.tsx",
         "content_scripts/js/index": "./src/content_scripts/scripts/index.ts"
     },
     output: {
@@ -12,7 +12,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts?$/,
+                test: /\.tsx?$|\.ts?$/,
                 use: "ts-loader",
                 exclude: /(node_modules|bower_components)/,
             },
@@ -26,7 +26,7 @@ module.exports = {
     },
     plugins: [],
     resolve: {
-        extensions: [".ts", ".js"],
+        extensions: [".ts", ".js", ".tsx"],
         modules: [
             path.resolve(__dirname),
             "node_modules"

@@ -1,7 +1,7 @@
 {
-  "name": "unofficial-oxford-learner-s-dictionaries",
+  "name": "quick-dict",
   "version": "1.0.0",
-  "description": "This product uses the data of Oxford Learner's Dictionaries but it is a fan-made extension. I'm just a regular user and I find that having an extension for that site is extreamly useful.",
+  "description": "A chrome extension that allows user to quickly search for a word in his favor dictionary website",
   "repository": {
     "git": ""
   },
@@ -15,10 +15,14 @@
   "author": "mrtrandinhvn@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1"
   },
   "devDependencies": {
     "@types/jest": "^21.1.6",
+    "@types/react": "^16.0.25",
+    "@types/react-dom": "^16.0.3",
     "babel-core": "^6.26.0",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
