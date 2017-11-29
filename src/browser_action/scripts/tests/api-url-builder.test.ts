@@ -21,7 +21,7 @@ describe("Test api-url-builder", () => {
     });
 
     it("case-4: hellochao", () => {
-        const actualResult = buildUrl("go home", DictionaryType.hellochao_tudien);
+        const actualResult = buildUrl("go home", DictionaryType.Hellochao_tudien);
         const expectation = "https://www.hellochao.vn/tu-dien-tach-ghep-am/?act=search&type=word&sct=go%20home";
         expect(actualResult).toBe(expectation);
     });
@@ -31,4 +31,11 @@ describe("Test api-url-builder", () => {
         const expectation = "https://www.oxfordlearnersdictionaries.com/definition/english/this";
         expect(actualResult).toBe(expectation);
     });
+
+    it("case-6: google translate", () => {
+        const actualResult = buildUrl("this is", DictionaryType.GoogleTranslate);
+        const expectation = "https://translate.google.com/#auto/vi/this%20is";
+        expect(actualResult).toBe(expectation);
+    });
+
 });

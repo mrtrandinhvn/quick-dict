@@ -1,5 +1,6 @@
 @import "../../shared/_shared";
 #dinh-tooltip {
+    z-index: 99999;
     display: block;
     position: fixed;
     border-radius: 5px;
@@ -8,12 +9,17 @@
     padding: 5px;
     flex-wrap: wrap;
     max-width: 115px;
-    @include transition(0.1s);
-    &__oxford {
+    %dictLogo {
         background-size: contain;
     }
+    &__oxford {
+        @extend %dictLogo;
+    }
     &__hellochao {
-        background-size: contain
+        @extend %dictLogo;
+    }
+    &__googletranslate {
+        @extend %dictLogo;
     }
 }
 

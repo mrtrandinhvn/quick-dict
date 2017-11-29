@@ -8,7 +8,7 @@ const state = {
         clientY: 0,
     },
 };
-// chrome.extension.getURL
+
 const tooltip = document.createElement("div");
 tooltip.innerHTML = `
     <a id="dinh-tooltip__oxford"
@@ -16,14 +16,21 @@ tooltip.innerHTML = `
         class="site-icon"
         target="_blank"
         title="Oxford Learner's Dictionary"
-        style="background-image:url(${("/resources/images/oxford.png")})">
+        style="background-image:url(${chrome.extension.getURL("/resources/images/oxford.png")})">
     </a>
     <a id="dinh-tooltip__hellochao"
         rel="noopenner"
         class="site-icon"
         target="_blank"
         title="hellochao"
-        style="background-image:url(${("/resources/images/hellochao.png")})">
+        style="background-image:url(${chrome.extension.getURL("/resources/images/hellochao.png")})">
+    </a>
+    <a id="dinh-tooltip__googletranslate"
+        rel="noopenner"
+        class="site-icon"
+        target="_blank"
+        title="Google Translate"
+        style="background-image:url(${chrome.extension.getURL("/resources/images/googletranslate.png")})">
     </a>
 `;
 tooltip.id = "dinh-tooltip";
@@ -77,9 +84,10 @@ document.addEventListener("selectionchange", (event) => {
 function showTooltip(event: Event, selectedText: string) {
     tooltip.style.display = "flex";
     tooltip.style.top = (state.mouse.clientY < 25 ? 0 : state.mouse.clientY - 25) + "px";
-    tooltip.style.left = state.mouse.clientX + 25 + "px";
+    tooltip.style.left = state.mouse.clientX + 100 + "px";
     (document.getElementById("dinh-tooltip__oxford") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.Oxford_English);
-    (document.getElementById("dinh-tooltip__hellochao") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.hellochao_tudien);
+    (document.getElementById("dinh-tooltip__hellochao") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.Hellochao_tudien);
+    (document.getElementById("dinh-tooltip__googletranslate") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.GoogleTranslate);
 }
 
 function hideTooltip() {

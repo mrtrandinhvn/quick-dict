@@ -1,8 +1,16 @@
 if exist "release" rd "release" /s /q
 del "release.zip"
 mkdir "release"
-xcopy css release\css\ /e /y
+xcopy src release\src\ /e /y
+xcopy built release\built\ /e /y
 xcopy icons release\icons\ /e /y
-xcopy js release\js\ /e /y
-echo f | xcopy default_popup.html release\default_popup.html /y
+xcopy resources release\resources\ /e /y
 echo f | xcopy manifest.json release\manifest.json /y
+
+cd release
+del /s "**.dummy.js**"
+del /s "**.map**"
+del /s "**.ts**"
+del /s "**.scss**"
+
+cd ../
