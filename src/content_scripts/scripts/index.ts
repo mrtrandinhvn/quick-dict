@@ -1,5 +1,6 @@
 import { buildUrl } from "../../browser_action/scripts/api-url-builder";
 import { DictionaryType } from "../../browser_action/scripts/constants";
+
 const state = {
     mouse: {
         dragging: false,
@@ -7,7 +8,7 @@ const state = {
         clientY: 0,
     },
 };
-
+// chrome.extension.getURL
 const tooltip = document.createElement("div");
 tooltip.innerHTML = `
     <a id="dinh-tooltip__oxford"
@@ -15,14 +16,14 @@ tooltip.innerHTML = `
         class="site-icon"
         target="_blank"
         title="Oxford Learner's Dictionary"
-        style="background-image:url(${chrome.extension.getURL("/resources/images/oxford.png")})">
+        style="background-image:url(${("/resources/images/oxford.png")})">
     </a>
     <a id="dinh-tooltip__hellochao"
         rel="noopenner"
         class="site-icon"
         target="_blank"
         title="hellochao"
-        style="background-image:url(${chrome.extension.getURL("/resources/images/hellochao.png")})">
+        style="background-image:url(${("/resources/images/hellochao.png")})">
     </a>
 `;
 tooltip.id = "dinh-tooltip";
