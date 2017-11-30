@@ -22,11 +22,13 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.32",
     "@babel/preset-env": "^7.0.0-beta.32",
+    "@types/deep-freeze": "^0.1.1",
     "@types/jest": "^21.1.8",
     "@types/react": "^16.0.25",
     "@types/react-dom": "^16.0.3",
     "babel-loader": "8.0.0-beta.0",
     "css-loader": "^0.28.7",
+    "deep-freeze": "^0.0.1",
     "eslint": "^4.12.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "jest": "^21.2.1",

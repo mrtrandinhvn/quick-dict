@@ -25,7 +25,7 @@
             "19": "icons/icon16.png",
             "38": "icons/icon48.png"
         },
-        "default_popup": "default_popup.html"
+        "default_popup": "src/browser_action/index.html"
     },
     "web_accessible_resources": [
         "resources/images/*"

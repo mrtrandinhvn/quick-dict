@@ -1,13 +1,20 @@
+import * as deepFreeze from "deep-freeze";
 import { buildUrl } from "../../browser_action/scripts/api-url-builder";
 import { DictionaryType } from "../../browser_action/scripts/constants";
 
-const state = {
+let state = {
+    tooltip: {
+        active: false,
+    },
     mouse: {
         dragging: false,
         clientX: 0,
         clientY: 0,
     },
 };
+if (process.env.NODE_ENV !== "production") {
+    deepFreeze(state);
+}
 
 const tooltip = document.createElement("div");
 tooltip.innerHTML = `
@@ -35,16 +42,19 @@ tooltip.innerHTML = `
 `;
 tooltip.id = "dinh-tooltip";
 document.body.appendChild(tooltip); // append a hidden element to the dom
-
+//#region document events
 /**
  * Start dragging
  */
 document.addEventListener("mousedown", (event) => {
-    state.mouse = {
-        ...state.mouse,
-        dragging: true,
-        clientX: event.clientX,
-        clientY: event.clientY,
+    state = {
+        ...state,
+        mouse: {
+            ...state.mouse,
+            dragging: true,
+            clientX: event.clientX,
+            clientY: event.clientY,
+        },
     };
 });
 
@@ -54,10 +64,13 @@ document.addEventListener("mousedown", (event) => {
 document.addEventListener("mousemove", (event) => {
     if (!state.mouse.dragging) { return; }
 
-    state.mouse = {
-        ...state.mouse,
-        clientX: event.clientX,
-        clientY: event.clientY,
+    state = {
+        ...state,
+        mouse: {
+            ...state.mouse,
+            clientX: event.clientX,
+            clientY: event.clientY,
+        },
     };
 });
 
@@ -80,11 +93,24 @@ document.addEventListener("selectionchange", (event) => {
         hideTooltip();
     }
 });
+//#endregion
 
+//#region tooltip actions
+const tooltipWidth = 124;
+const scrollbarWidth = 17;
 function showTooltip(event: Event, selectedText: string) {
+    state = {
+        ...state,
+        tooltip: {
+            active: true,
+        },
+    };
     tooltip.style.display = "flex";
-    tooltip.style.top = (state.mouse.clientY < 25 ? 0 : state.mouse.clientY - 25) + "px";
-    tooltip.style.left = state.mouse.clientX + 100 + "px";
+    tooltip.style.top = (state.mouse.clientY < 80 ? 0 : state.mouse.clientY - 80) + "px";
+
+    const maxLeft = window.innerWidth - tooltipWidth - scrollbarWidth;
+    const left = (state.mouse.clientX > maxLeft ? maxLeft : state.mouse.clientX) + "px";
+    tooltip.style.left = left;
     (document.getElementById("dinh-tooltip__oxford") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.Oxford_English);
     (document.getElementById("dinh-tooltip__hellochao") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.Hellochao_tudien);
     (document.getElementById("dinh-tooltip__googletranslate") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.GoogleTranslate);
@@ -92,6 +118,14 @@ function showTooltip(event: Event, selectedText: string) {
 
 function hideTooltip() {
     tooltip.style.display = "none";
+    state = {
+        ...state,
+        tooltip: {
+            active: false,
+        },
+    };
 }
-
-console.log("ready");
+//#endregion
+if (process.env.NODE_ENV !== "production") {
+    console.log("ready");
+}
