@@ -6,4 +6,4 @@ A chrome extension that allows you to quickly open your favorite dictionary webs
 2. Click on your favorite dictionary icon.
 
 ### License
-&copy;[MIT License](https://github.com/mrtrandinhvn/quick-dict/blob/master/LICENSE)
+-Copyright (c) 2017 mrtrandinhvn
