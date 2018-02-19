@@ -15,7 +15,8 @@
     background-color: #fff;
     padding: 5px;
     flex-wrap: wrap;
-    width: 76px;
+    width: 86px;
+    box-sizing: border-box;
     @include transition;
     &__oxford {
         @extend %dictLogo;
