@@ -9,7 +9,8 @@
             "options": [
                 1000
             ]
-        }
+        },
+        "no-switch-case-fall-through": true
     },
     "rulesDirectory": []
 }

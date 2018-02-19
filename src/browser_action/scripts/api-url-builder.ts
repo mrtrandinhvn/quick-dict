@@ -6,17 +6,21 @@ import { DictionaryType } from "./constants";
  * @param type Dictionary type
  */
 export function buildUrl(text: string, type: DictionaryType) {
+    const params = encodeURI(text);
     switch (type) {
         case DictionaryType.Oxford_English:
-            return `https://www.oxfordlearnersdictionaries.com/definition/english/${encodeURI(text)}`;
+            return `https://www.oxfordlearnersdictionaries.com/definition/english/${params}`;
 
         case DictionaryType.Hellochao_tudien:
-            return `https://www.hellochao.vn/tu-dien-tach-ghep-am/?act=search&type=word&sct=${encodeURI(text)}`;
+            return `https://www.hellochao.vn/tu-dien-tach-ghep-am/?act=search&type=word&sct=${params}`;
 
         case DictionaryType.GoogleTranslate:
-            return `https://translate.google.com/#auto/vi/${encodeURI(text)}`;
+            return `https://translate.google.com/#auto/vi/${params}`;
 
-        default:
-            return `https://www.oxfordlearnersdictionaries.com/autocomplete/${type}/?q=${encodeURI(text)}&contentType=application%2Fjson%3B%20charset%3Dutf-8`;
+        case DictionaryType.TraTuNhatViet:
+            return `https://www.tratunhatviet.com/tra-han-tu-kanji/${params}`;
+
+        default: // Oxford Learner's dictionaries autocomplete api
+            return `https://www.oxfordlearnersdictionaries.com/autocomplete/${type}/?q=${params}&contentType=application%2Fjson%3B%20charset%3Dutf-8`;
     }
 }

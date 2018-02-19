@@ -38,4 +38,9 @@ describe("Test api-url-builder", () => {
         expect(actualResult).toBe(expectation);
     });
 
+    it("case-7: tratunhatviet", () => {
+        const actualResult = buildUrl("忘れる", DictionaryType.TraTuNhatViet);
+        const expectation = "https://www.tratunhatviet.com/tra-han-tu-kanji/%E5%BF%98%E3%82%8C%E3%82%8B";
+        expect(actualResult).toBe(expectation);
+    });
 });

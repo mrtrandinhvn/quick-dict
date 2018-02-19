@@ -4,4 +4,5 @@ export enum DictionaryType {
     Oxford_English = "Oxford_English",
     Hellochao_tudien = "hellochao_tudien",
     GoogleTranslate = "google-translate",
+    TraTuNhatViet = "tratunhatviet",
 }

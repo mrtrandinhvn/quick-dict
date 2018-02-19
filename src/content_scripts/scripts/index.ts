@@ -1,7 +1,6 @@
 import * as deepFreeze from "deep-freeze";
 import { buildUrl } from "../../browser_action/scripts/api-url-builder";
 import { DictionaryType } from "../../browser_action/scripts/constants";
-
 let state = {
     tooltip: {
         active: false,
@@ -16,32 +15,15 @@ if (process.env.NODE_ENV !== "production") {
     deepFreeze(state);
 }
 
-const tooltip = document.createElement("div");
-tooltip.innerHTML = `
-    <a id="dinh-tooltip__oxford"
-        rel="noopenner"
-        class="site-icon"
-        target="_blank"
-        title="Oxford Learner's Dictionary"
-        style="background-image:url(${chrome.extension.getURL("/resources/images/oxford.png")})">
-    </a>
-    <a id="dinh-tooltip__hellochao"
-        rel="noopenner"
-        class="site-icon"
-        target="_blank"
-        title="hellochao"
-        style="background-image:url(${chrome.extension.getURL("/resources/images/hellochao.png")})">
-    </a>
-    <a id="dinh-tooltip__googletranslate"
-        rel="noopenner"
-        class="site-icon"
-        target="_blank"
-        title="Google Translate"
-        style="background-image:url(${chrome.extension.getURL("/resources/images/googletranslate.png")})">
-    </a>
-`;
+const tooltip: HTMLDivElement = document.createElement("div");
+const tooltipItems: HTMLAnchorElement[] = [];
+tooltipItems.push(tooltip.appendChild(buildTooltipItem(DictionaryType.Oxford_English)));
+tooltipItems.push(tooltip.appendChild(buildTooltipItem(DictionaryType.Hellochao_tudien)));
+tooltipItems.push(tooltip.appendChild(buildTooltipItem(DictionaryType.GoogleTranslate)));
+tooltipItems.push(tooltip.appendChild(buildTooltipItem(DictionaryType.TraTuNhatViet)));
 tooltip.id = "dinh-tooltip";
 document.body.appendChild(tooltip); // append a hidden element to the dom
+
 //#region document events
 /**
  * Start dragging
@@ -109,11 +91,13 @@ function showTooltip(event: Event, selectedText: string) {
     tooltip.style.top = (state.mouse.clientY < 80 ? 0 : state.mouse.clientY - 80) + "px";
 
     const maxLeft = window.innerWidth - tooltipWidth - scrollbarWidth;
-    const left = (state.mouse.clientX > maxLeft ? maxLeft : state.mouse.clientX) + "px";
+    const left = (state.mouse.clientX > maxLeft ? maxLeft : state.mouse.clientX + 10) + "px";
     tooltip.style.left = left;
-    (document.getElementById("dinh-tooltip__oxford") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.Oxford_English);
-    (document.getElementById("dinh-tooltip__hellochao") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.Hellochao_tudien);
-    (document.getElementById("dinh-tooltip__googletranslate") as HTMLAnchorElement).href = buildUrl(selectedText, DictionaryType.GoogleTranslate);
+
+    for (const item of tooltipItems) {
+        const type = item.attributes.getNamedItem("data-type").value;
+        item.href = buildUrl(selectedText, type as DictionaryType);
+    }
 }
 
 function hideTooltip() {
@@ -125,7 +109,44 @@ function hideTooltip() {
         },
     };
 }
+
+function buildTooltipItem(type: DictionaryType) {
+    const dictItem = document.createElement("a");
+    dictItem.target = "_blank";
+    dictItem.className = "site-icon";
+    dictItem.rel = "noopenner";
+    const attribute = document.createAttribute("data-type");
+    attribute.value = type;
+    dictItem.attributes.setNamedItem(attribute);
+    switch (type) {
+        case DictionaryType.Oxford_English:
+            dictItem.title = "Oxford Learner's Dictionary";
+            dictItem.style.backgroundImage = `url(${chrome.extension.getURL("/resources/images/oxford.png")})`;
+            dictItem.id += `dinh-tooltip__oxford`;
+            break;
+
+        case DictionaryType.Hellochao_tudien:
+            dictItem.title = "HelloChao";
+            dictItem.style.backgroundImage = `url(${chrome.extension.getURL("/resources/images/hellochao.png")})`;
+            dictItem.id += `dinh-tooltip__hellochao`;
+            break;
+
+        case DictionaryType.GoogleTranslate:
+            dictItem.title = "Google Translate";
+            dictItem.style.backgroundImage = `url(${chrome.extension.getURL("/resources/images/googletranslate.png")})`;
+            dictItem.id += `dinh-tooltip__googletranslate`;
+            break;
+
+        case DictionaryType.TraTuNhatViet:
+            dictItem.title = "Tra từ Nhật Việt";
+            dictItem.style.backgroundImage = `url(${chrome.extension.getURL("/resources/images/tratunhatviet.svg")})`;
+            dictItem.id += `dinh-tooltip__nhatviet`;
+            break;
+    }
+    return dictItem;
+}
 //#endregion
 if (process.env.NODE_ENV !== "production") {
+    // tslint:disable-next-line:no-console
     console.log("ready");
 }

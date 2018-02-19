@@ -1,6 +1,9 @@
 @import "../../shared/_shared";
 %dictLogo {
-    background-size: contain;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 1px 1px 5px 0px #b1b1b1;
 }
 
 #dinh-tooltip {
@@ -12,7 +15,7 @@
     background-color: #fff;
     padding: 5px;
     flex-wrap: wrap;
-    width: 124px;
+    width: 76px;
     @include transition;
     &__oxford {
         @extend %dictLogo;
@@ -21,6 +24,9 @@
         @extend %dictLogo;
     }
     &__googletranslate {
+        @extend %dictLogo;
+    }
+    &__nhatviet {
         @extend %dictLogo;
     }
 }
