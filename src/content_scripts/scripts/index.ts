@@ -78,7 +78,11 @@ document.addEventListener("selectionchange", (event) => {
 //#endregion
 
 //#region tooltip actions
-const tooltipWidth = 124;
+const popupDimensions = {  // px
+    width: 124,
+    height: 86,
+    margin: 16,
+};
 const scrollbarWidth = 17;
 function showTooltip(event: Event, selectedText: string) {
     state = {
@@ -88,9 +92,10 @@ function showTooltip(event: Event, selectedText: string) {
         },
     };
     tooltip.style.display = "flex";
-    tooltip.style.top = (state.mouse.clientY < 80 ? 0 : state.mouse.clientY - 80) + "px";
+    const heightWithMargin = popupDimensions.margin + popupDimensions.height;
+    tooltip.style.top = (state.mouse.clientY <= heightWithMargin ? heightWithMargin : state.mouse.clientY - heightWithMargin) + "px";
 
-    const maxLeft = window.innerWidth - tooltipWidth - scrollbarWidth;
+    const maxLeft = window.innerWidth - popupDimensions.width - scrollbarWidth;
     const left = (state.mouse.clientX > maxLeft ? maxLeft : state.mouse.clientX + 10) + "px";
     tooltip.style.left = left;
 

@@ -1,2 +1,1 @@
-import { buildUrl } from "./api-url-builder";
-import { DictionaryType } from "./constants";
+document.getElementById("versionNumber").innerText = chrome.app.getDetails().version;
