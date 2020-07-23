@@ -18,7 +18,7 @@ export function buildUrl(text: string, type: DictionaryType) {
             return `https://translate.google.com/#auto/vi/${params}`;
 
         case DictionaryType.TraTuNhatViet:
-            return `https://www.tratunhatviet.com/tra-han-tu-kanji/${params}`;
+            return `https://jdict.net/search?keyword=${params}&type=word`;
 
         default: // Oxford Learner's dictionaries autocomplete api
             return `https://www.oxfordlearnersdictionaries.com/autocomplete/${type}/?q=${params}&contentType=application%2Fjson%3B%20charset%3Dutf-8`;

@@ -38,9 +38,10 @@ describe("Test api-url-builder", () => {
         expect(actualResult).toBe(expectation);
     });
 
-    it("case-7: tratunhatviet", () => {
-        const actualResult = buildUrl("忘れる", DictionaryType.TraTuNhatViet);
-        const expectation = "https://www.tratunhatviet.com/tra-han-tu-kanji/%E5%BF%98%E3%82%8C%E3%82%8B";
+    it("case-7: Japanese", () => {
+        const input = "忘れる";
+        const actualResult = buildUrl(input, DictionaryType.TraTuNhatViet);
+        const expectation = `https://jdict.net/search?keyword=${encodeURI(input)}&type=word`;;
         expect(actualResult).toBe(expectation);
     });
 });
