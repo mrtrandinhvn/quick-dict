@@ -7,17 +7,19 @@
         "48": "icons/icon64.png",
         "128": "icons/icon128.png"
     },
-    "content_scripts": [{
-        "matches": [
-            "*://*/*"
-        ],
-        "css": [
-            "./built/content_scripts/css/index.css"
-        ],
-        "js": [
-            "./built/content_scripts/scripts/index.js"
-        ]
-    }],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "css": [
+                "./built/content_scripts/css/index.css"
+            ],
+            "js": [
+                "./built/content_scripts/scripts/index.js"
+            ]
+        }
+    ],
     "action": {
         "default_icon": {
             "16": "icons/icon16.png",
@@ -25,10 +27,16 @@
         },
         "default_popup": "src/browser_action/index.html"
     },
-    "web_accessible_resources": [{
-        "resources": ["resources/images/*"],
-        "matches": ["*://*/*"]
-    }],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "resources/images/*"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ],
     "manifest_version": 3,
     "author": "mrtrandinhvn@gmail.com"
 }
