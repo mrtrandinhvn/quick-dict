@@ -1,4 +1,4 @@
-@import "../../shared/_shared";
+@use "../../shared/_shared" as *;
 %dictLogo {
     background-size: 80%;
     background-repeat: no-repeat;

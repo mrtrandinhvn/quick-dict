@@ -1,6 +1,6 @@
 {
     "name": "Quick Dict - Từ điển nhanh",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "Allow you to quickly open a translate site after you select some text by mouse",
     "icons": {
         "16": "icons/icon16.png",
@@ -15,19 +15,20 @@
             "./built/content_scripts/css/index.css"
         ],
         "js": [
-            "./built/content_scripts/js/index.bundle.js"
+            "./built/content_scripts/scripts/index.js"
         ]
     }],
-    "browser_action": {
+    "action": {
         "default_icon": {
-            "19": "icons/icon16.png",
-            "38": "icons/icon64.png"
+            "16": "icons/icon16.png",
+            "32": "icons/icon64.png"
         },
         "default_popup": "src/browser_action/index.html"
     },
-    "web_accessible_resources": [
-        "resources/images/*"
-    ],
-    "manifest_version": 2,
+    "web_accessible_resources": [{
+        "resources": ["resources/images/*"],
+        "matches": ["*://*/*"]
+    }],
+    "manifest_version": 3,
     "author": "mrtrandinhvn@gmail.com"
 }

@@ -1,16 +1,29 @@
+@echo off
+echo Building extension...
+call npm run build
+if %errorlevel% neq 0 (
+    echo Build failed! Aborting release.
+    exit /b %errorlevel%
+)
+
+echo Creating release package...
 if exist "release" rd "release" /s /q
-del "release.zip"
+if exist "release.zip" del "release.zip"
+
 mkdir "release"
-xcopy src release\src\ /e /y
+
+REM Copy only necessary files for the extension
 xcopy built release\built\ /e /y
 xcopy icons release\icons\ /e /y
 xcopy resources release\resources\ /e /y
+xcopy src\browser_action\*.html release\src\browser_action\ /y
 echo f | xcopy manifest.json release\manifest.json /y
 
+REM Clean up source maps and unnecessary files
 cd release
-del /s "**.dummy.js**"
-del /s "**.map**"
-del /s "**.ts**"
-del /s "**.scss**"
+del /s /q "*.map" >nul 2>&1
 
-cd ../
+echo.
+echo Release package created in 'release' folder
+echo Ready to zip and upload to Chrome Web Store!
+cd ..

@@ -1,4 +1,4 @@
-import * as deepFreeze from "deep-freeze";
+import deepFreeze from "deep-freeze";
 import { buildUrl } from "../../browser_action/scripts/api-url-builder";
 import { DictionaryType } from "../../browser_action/scripts/constants";
 let state = {
@@ -68,6 +68,7 @@ document.addEventListener("mouseup", (event) => {
 
 document.addEventListener("selectionchange", (event) => {
     const selection = getSelection();
+    if (!selection) return;
     const selectedText = selection.toString().trim();
     if (selectedText) {
         showTooltip(event, selectedText);
@@ -100,7 +101,9 @@ function showTooltip(event: Event, selectedText: string) {
     tooltip.style.left = left;
 
     for (const item of tooltipItems) {
-        const type = item.attributes.getNamedItem("data-type").value;
+        const typeAttr = item.attributes.getNamedItem("data-type");
+        if (!typeAttr) continue;
+        const type = typeAttr.value;
         item.href = buildUrl(selectedText, type as DictionaryType);
     }
 }
@@ -126,25 +129,25 @@ function buildTooltipItem(type: DictionaryType) {
     switch (type) {
         case DictionaryType.Oxford_English:
             dictItem.title = "Oxford Learner's Dictionary";
-            dictItem.style.backgroundImage = `url(${chrome.extension.getURL("/resources/images/oxford.png")})`;
+            dictItem.style.backgroundImage = `url(${chrome.runtime.getURL("/resources/images/oxford.png")})`;
             dictItem.id += `dinh-tooltip__oxford`;
             break;
 
         case DictionaryType.Hellochao_tudien:
             dictItem.title = "HelloChao";
-            dictItem.style.backgroundImage = `url(${chrome.extension.getURL("/resources/images/hellochao.png")})`;
+            dictItem.style.backgroundImage = `url(${chrome.runtime.getURL("/resources/images/hellochao.png")})`;
             dictItem.id += `dinh-tooltip__hellochao`;
             break;
 
         case DictionaryType.GoogleTranslate:
             dictItem.title = "Google Translate";
-            dictItem.style.backgroundImage = `url(${chrome.extension.getURL("/resources/images/googletranslate.png")})`;
+            dictItem.style.backgroundImage = `url(${chrome.runtime.getURL("/resources/images/googletranslate.png")})`;
             dictItem.id += `dinh-tooltip__googletranslate`;
             break;
 
         case DictionaryType.TraTuNhatViet:
             dictItem.title = "Tra từ Nhật Việt";
-            dictItem.style.backgroundImage = `url(${chrome.extension.getURL("/resources/images/tratunhatviet.svg")})`;
+            dictItem.style.backgroundImage = `url(${chrome.runtime.getURL("/resources/images/tratunhatviet.svg")})`;
             dictItem.id += `dinh-tooltip__nhatviet`;
             break;
     }

@@ -1,1 +1,4 @@
-document.getElementById("versionNumber").innerText = chrome.app.getDetails().version;
+const versionElement = document.getElementById("versionNumber");
+if (versionElement) {
+    versionElement.innerText = chrome.runtime.getManifest().version;
+}
