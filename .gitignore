@@ -56,3 +56,4 @@ typings/
 release
 .vscode
 .claude/settings.local.json
+release.zip
